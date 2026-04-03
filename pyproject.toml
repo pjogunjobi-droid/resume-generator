@@ -1,7 +1,0 @@
-[project]
-name = "resume-generator"
-version = "1.0.0"
-dependencies = [
-    "streamlit>=1.28.0",
-    "openai>=1.0.0"
-]
