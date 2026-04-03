@@ -21,7 +21,7 @@ if st.button("Generate Optimized Resume"):
         st.warning("Please fill both fields")
     else:
         with st.spinner("DeepSeek is writing a highly optimized resume (this takes about 15 seconds)..."):
-            client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+            client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com/v1")
             response = client.chat.completions.create(
                 model="deepseek-chat",
                 messages=[
