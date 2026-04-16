@@ -126,13 +126,14 @@ def create_pdf_from_text(content_text):
                             topMargin=0.8*inch, bottomMargin=0.8*inch,
                             leftMargin=0.8*inch, rightMargin=0.8*inch)
     styles = getSampleStyleSheet()
-    # Custom styles
+    # Custom styles – use unique names
     styles.add(ParagraphStyle(name='CustomTitle', parent=styles['Heading1'],
                               fontSize=14, spaceAfter=12, alignment=TA_CENTER))
     styles.add(ParagraphStyle(name='SectionHead', parent=styles['Heading2'],
                               fontSize=12, spaceBefore=10, spaceAfter=6,
                               textTransform='uppercase'))
-    styles.add(ParagraphStyle(name='Bullet', parent=styles['Normal'],
+    # FIX: Renamed from 'Bullet' to 'CustomBullet' to avoid conflict
+    styles.add(ParagraphStyle(name='CustomBullet', parent=styles['Normal'],
                               leftIndent=20, bulletIndent=10, spaceAfter=4))
     
     story = []
@@ -146,7 +147,8 @@ def create_pdf_from_text(content_text):
            line.startswith('PROFESSIONAL EXPERIENCE') or line.startswith('EDUCATION'):
             story.append(Paragraph(line, styles['SectionHead']))
         elif line.startswith('-') or line.startswith('•'):
-            story.append(Paragraph(f'• {line[1:].strip()}', styles['Bullet']))
+            # Use the new name here too
+            story.append(Paragraph(f'• {line[1:].strip()}', styles['CustomBullet']))
         else:
             story.append(Paragraph(line, styles['Normal']))
         story.append(Spacer(1, 6))
